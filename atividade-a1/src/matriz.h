@@ -3,6 +3,8 @@
 
 #include <tuple>
 
+using namespace std;
+
 class Matriz {
     public:
 		// Construtor

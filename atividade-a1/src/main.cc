@@ -2,7 +2,7 @@
 
 int main(void) {
 
-    grafo = new Grafo();
+    Grafo grafo = new Grafo();
+    grafo.ler("arquivo_fonte.txt");
     return 0;
-
 }
