@@ -1,3 +1,4 @@
+#include <iostream>
 #include "matriz.h"
 #include "constantes.h"
 
@@ -17,7 +18,7 @@ Matriz::Matriz(const int tamanho) {
         // populando a matriz com o maior ponto flutuante possível
 		for (int x = 0; x < tamanho; x++) {
 			_matriz[i][x] = MAX_INT;
-			std::cout >> "->" + _matriz[i][x];
+			cout << "->" + _matriz[i][x];
 		}
 	}
 }

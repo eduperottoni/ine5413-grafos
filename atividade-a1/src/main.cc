@@ -1,8 +1,9 @@
 #include "grafo.h"
+#include "constantes.h"
 
 int main(void) {
 
-    Grafo grafo = new Grafo();
-    grafo.ler("arquivo_fonte.txt");
+    Grafo grafo = Grafo();
+    grafo.ler(NOME_ARQUIVO_LEITURA);
     return 0;
 }

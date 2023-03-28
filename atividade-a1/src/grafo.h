@@ -1,6 +1,7 @@
 #ifndef grafo_h
 #define grafo_h
 
+#include <string>
 #include "nodo.h"
 #include "matriz.h"
 
@@ -22,7 +23,7 @@ class Grafo
 		// se {u, v} ∈ E, retorna o peso da aresta {u, v}; se nao existir, retorna um valor infinito positivo
         int peso(Nodo v, Nodo u); 
 		// deve carregar um grafo a partir de um arquivo no formato especificado ao final deste documento
-        void ler(char nome_do_arquivo); 
+        void ler(string nome_do_arquivo); 
 
     private:
 		// Número de vértices
@@ -32,7 +33,7 @@ class Grafo
 		// Matriz que representa o grafo
 		Matriz * _matriz;
 		// Lista de adjacências que representa o grafo
-		ListaAdj * _listaAdj;
+		// ListaAdj * _listaAdj;
 
 };
 
