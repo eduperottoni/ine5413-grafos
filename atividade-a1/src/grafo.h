@@ -8,6 +8,8 @@
 class Grafo
 {
     public:
+        // Construtor
+        Grafo();
         // retorna a quantidade de vertices
         int qtdVertices(); 
 		// retorna a quantidade de arestas
@@ -31,7 +33,7 @@ class Grafo
 		// Número de arestas
         int _arestas;
 		// Matriz que representa o grafo
-		Matriz * _matriz;
+		// Matriz * _matriz;
 		// Lista de adjacências que representa o grafo
 		// ListaAdj * _listaAdj;
 

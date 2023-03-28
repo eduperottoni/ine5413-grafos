@@ -6,6 +6,12 @@
 
 using namespace std;
 
+Grafo::Grafo() {
+    _vertices = 0;
+    _arestas = 0;
+    // _matriz = nullptr;
+}
+
 int Grafo::qtdVertices() {
     return _vertices;
 }
@@ -44,17 +50,15 @@ void Grafo::ler(string nome_arquivo) {
 
     string conteudo;
     int linha = 0;
+    string conteudo_linha;
 
     while (!arquivo.eof()) {
         linha++;
-        arquivo >> conteudo;
-        string tag = "";
-        for (int i = 0; i < conteudo.size(); i++) {
-            tag += conteudo[i];
-            cout << tag;
-        }
+        getline(arquivo, conteudo_linha);
+        // cout << "ola" + conteudo_linha + "\n";
+        string tag = conteudo_linha;
+        cout << tag + "\n";
     }
 
     arquivo.close();
-
 }
