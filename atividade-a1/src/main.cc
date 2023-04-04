@@ -3,10 +3,11 @@
 
 int main(void) {
 
-    Grafo grafo = Grafo();
+    Grafo<int> grafo = Grafo<int>();
     grafo.ler(NOME_ARQUIVO_LEITURA);
 
-    Matriz<unsigned int> mat = Matriz<unsigned int>(5);
+    // Matriz<unsigned int> mat = Matriz<unsigned int>(5);
 
+    
     return 0;
 }

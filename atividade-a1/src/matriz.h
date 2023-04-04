@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <tuple>
+#include <limits>
 #include "constantes.h"
 
 
@@ -33,6 +34,26 @@ class Matriz {
 
 #endif
 
+
+template<typename T>
+Matriz<T>::Matriz(const int tamanho) {
+	_dimensao = tamanho;
+	_matriz = new T* [tamanho];
+	string tipo = typeid(T).name();
+    T infinitoTipo = numeric_limits<T>::max();
+    cout << "tipo: " + tipo + "\n";
+    cout << "sdfsdfgsdfgsd";
+    // adicionando as colunas para cada linha
+	for (int i = 0; i < tamanho; i++) {
+		_matriz[i] = new T[tamanho];
+	// populando a matriz com o maior ponto flutuante possível
+		for (int x = 0; x < tamanho; x++) {
+			_matriz[i][x] = infinitoTipo;
+			cout << to_string(_matriz[i][x]) + "\n";
+		}
+	}
+}
+
 // Definido no .h, por conta do template
 //@TODO fazer teste para definição do infinito do tipo
 /*
@@ -42,14 +63,14 @@ CHAR_MAX, SCHAR_MAX, UCHAR_MAX, SHRT_MAX, USHRT_MAX, INT_MAX, UINT_MAX, LONG_MAX
 Usar:
 
 #include <iostream>
-#include <limits>
+
 
 using namespace std;
 
 template<typename T>
 void showMinMax() {
    cout << "min: " << numeric_limits<T>::min() << endl;
-   cout << "max: " << numeric_limits<T>::max() << endl;
+   cout << "max: " <<  << endl;
    cout << endl;
 }
 
@@ -76,19 +97,3 @@ int main() {
 }
 */
 
-template<typename T>
-Matriz<T>::Matriz(const int tamanho) {
-	_dimensao = tamanho;
-	_matriz = new T* [tamanho];
-	string tipo = typeid(T).name();
-	cout << tipo;
-    // adicionando as colunas para cada linha
-	for (int i = 0; i < tamanho; i++) {
-		_matriz[i] = new T[tamanho];
-	// populando a matriz com o maior ponto flutuante possível
-		for (int x = 0; x < tamanho; x++) {
-			_matriz[i][x] = MAX_INT;
-			cout << to_string(_matriz[i][x]) + "\n";
-		}
-	}
-}

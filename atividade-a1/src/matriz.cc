@@ -1,6 +1,5 @@
 #include "matriz.h"
 
-
 using namespace std;
 
 template<typename T>
