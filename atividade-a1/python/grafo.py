@@ -34,6 +34,7 @@ class Grafo:
                 nome = nome + linha[j]
                 nome = nome + ' '
             nome = nome + linha[len(linha)-1]
+            nome = nome.replace('"', "")
             self.__vertices.append(Vertice(int(linha[0]), nome))
         arquivo.readline()
         for linha in arquivo:
