@@ -114,7 +114,7 @@ void Grafo<T>::ler(string nome_arquivo) {
         }
         string nome = "";
         caracter = caracter + 2;
-        while (conteudo_linha[caracter] != '"') {
+        while (conteudo_linha[caracter] != EOF) {
             nome = nome + conteudo_linha[caracter];
             caracter++;
         }
@@ -124,10 +124,28 @@ void Grafo<T>::ler(string nome_arquivo) {
         //cout << vertice.getId() << " + " << vertice.getRotulo() << endl;
     }
 
-    // while (!arquivo.eof()) {
-    //     linha++;
+    while (!arquivo.eof()) {
+        string id1 = "";
+        int caracter = 0;
+        getline(arquivo, conteudo_linha);
+        if (conteudo_linha != "") {
+            while (conteudo_linha[caracter] != ' ') {
+                id1 = id1 + conteudo_linha[caracter];
+                caracter++;
+            }
+            caracter++;
+            string id2 = "";
+            while (conteudo_linha[caracter] != ' ') {
+                id2 = id2 + conteudo_linha[caracter];
+                caracter++;
+            }
+            caracter++;
+            // while (cont)
 
-    // }
+            // cout << id1 << " " << id2 << endl;
+            linha++;
+        }
+    }
 
     arquivo.close();
 }
