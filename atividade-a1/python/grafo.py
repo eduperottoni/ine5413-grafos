@@ -46,6 +46,7 @@ class Grafo:
                         if vertice2.id == int(linha[1]):
                             vertice.vizinhos[vertice2] = float(linha[2])
                             vertice2.vizinhos[vertice] = float(linha[2])
+        arquivo.close()
 
     @property
     def qtdVertices(self):
