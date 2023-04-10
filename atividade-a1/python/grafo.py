@@ -29,23 +29,26 @@ class Grafo:
         for i in range(int(primeira_linha[1])):
             linha = arquivo.readline()
             linha = linha.split()
+            print(linha)
+            
+            
             nome = ""
             for j in range(1, len(linha)-1):
                 nome = nome + linha[j]
                 nome = nome + ' '
+
+            
             nome = nome + linha[len(linha)-1]
             nome = nome.replace('"', "")
             self.__vertices.append(Vertice(int(linha[0]), nome))
         arquivo.readline()
         for linha in arquivo:
             linha = linha.split()
-            primeiro_vertice = int(linha[0])
-            for vertice in self.__vertices:
-                if vertice.id == primeiro_vertice:
-                    for vertice2 in self.__vertices:
-                        if vertice2.id == int(linha[1]):
-                            vertice.vizinhos[vertice2] = float(linha[2])
-                            vertice2.vizinhos[vertice] = float(linha[2])
+            vert_u = int(linha[0])
+            vert_v = int(linha[1])
+            weight_u_v = float(linha[2])
+            self.__vertices[vert_u].vizinhos[vert_v] = weight_u_v
+            self.__vertices[vert_v].vizinhos[vert_u] = weight_u_v
         arquivo.close()
 
     @property
