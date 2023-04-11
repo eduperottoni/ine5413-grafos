@@ -23,18 +23,21 @@ class Grafo:
     # se não for -> matriz triangular
     # TODO VER O CASO EM QUE O GRAFO É DIRIGIDO (ORDEM IMPORTA)
     def haAresta(self, id_vertice1: float, id_vertice2: float) -> bool:
-        id_max, id_min = max[id_vertice1, id_vertice2], min[id_vertice1, id_vertice2]
-        return self.__matriz[id_max][id_min] != float('inf')
+        id_max, id_min = max(id_vertice1, id_vertice2), min(id_vertice1, id_vertice2)
+        return self.__matriz[id_max-1][id_min-1] != float('inf')
 
     def ler(self, nome_arquivo: str):
+        # leitura do arquivo
         arquivo = open(nome_arquivo, 'r')
         primeira_linha = arquivo.readline().split()
         qtd_vertices = int(primeira_linha[1])
         self.__qtdVertices += qtd_vertices
+
+        # atribuindo o valor de "infinito"
         max_type = float('inf')
         self.__vertices = [max_type for i in range(qtd_vertices)]
         self.__matriz = [[max_type for i in range(qtd_vertices)] for j in range(qtd_vertices)]
-        print(len(self.__matriz))
+
         # posição na lista é id - 1
         for i in range(qtd_vertices):
             linha = arquivo.readline()
@@ -43,6 +46,7 @@ class Grafo:
             id = int(linha[0])
             self.__vertices[id - 1] = Vertice(int(linha[0]), nome)
         arquivo.readline()
+        
         # preenche lista de adj. e matriz
         for linha in arquivo:
             linha = linha.split()
