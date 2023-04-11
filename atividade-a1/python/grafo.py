@@ -1,54 +1,59 @@
 from vertice import Vertice
 
+#Por enquanto, aceita ambos os tipos de grafo, com matriz inteira
 class Grafo:
 
     def __init__(self):
         self.__qtdVertices = 0
         self.__qtdArestas = 0
-        self.__vertices = []
-        self.__matriz = []
 
+    def rotulo(self, id_vertice: int):
+        return self.__vertices[id_vertice - 1].rotulo
 
-    def peso(self, vertice1, vertice2):
-        pass
+    def grau(self, id_vertice: int):
+        return self.__vertices[id_vertice - 1].grau
+    
+    def vizinhos(self, id_vertice: int) -> list:
+        return self.__vertices[id_vertice - 1].vizinhos
+    
+    def peso(self, id_vertice1: int, id_vertice2: int) -> float:
+        return self.__matriz[id_vertice1 - 1][id_vertice2 - 1]
 
-    def vizinhos(self, value):
-        for vertice in self.__vertices:
-            if vertice.id == value:
-                return list(vertice.vizinhos.keys())
+    # se for dirigido -> matriz inteira
+    # se não for -> matriz triangular
+    # TODO VER O CASO EM QUE O GRAFO É DIRIGIDO (ORDEM IMPORTA)
+    def haAresta(self, id_vertice1: float, id_vertice2: float) -> bool:
+        id_max, id_min = max[id_vertice1, id_vertice2], min[id_vertice1, id_vertice2]
+        return self.__matriz[id_max][id_min] != float('inf')
 
-    def haAresta(self, vertice1, vertice2):
-        pass
-
-    def grau(self, vertice):
-        pass
-
-    def ler(self, txt):
-        arquivo = open(txt, 'r')
+    def ler(self, nome_arquivo: str):
+        arquivo = open(nome_arquivo, 'r')
         primeira_linha = arquivo.readline().split()
-        for i in range(int(primeira_linha[1])):
+        qtd_vertices = int(primeira_linha[1])
+        self.__qtdVertices += qtd_vertices
+        max_type = float('inf')
+        self.__vertices = [max_type for i in range(qtd_vertices)]
+        self.__matriz = [[max_type for i in range(qtd_vertices)] for j in range(qtd_vertices)]
+        print(len(self.__matriz))
+        # posição na lista é id - 1
+        for i in range(qtd_vertices):
             linha = arquivo.readline()
-            linha = linha.split()
-            print(linha)
-            
-            
-            nome = ""
-            for j in range(1, len(linha)-1):
-                nome = nome + linha[j]
-                nome = nome + ' '
-
-            
-            nome = nome + linha[len(linha)-1]
-            nome = nome.replace('"', "")
-            self.__vertices.append(Vertice(int(linha[0]), nome))
+            linha = linha.replace('"', "").replace('\n', '').split(' ', 1)
+            nome = linha[1]
+            id = int(linha[0])
+            self.__vertices[id - 1] = Vertice(int(linha[0]), nome)
         arquivo.readline()
+        # preenche lista de adj. e matriz
         for linha in arquivo:
             linha = linha.split()
-            vert_u = int(linha[0])
-            vert_v = int(linha[1])
+            vert_u_index = int(linha[0]) - 1
+            vert_v_index = int(linha[1]) - 1
             weight_u_v = float(linha[2])
-            self.__vertices[vert_u].vizinhos[vert_v] = weight_u_v
-            self.__vertices[vert_v].vizinhos[vert_u] = weight_u_v
+            self.__vertices[vert_u_index].vizinhos[str(vert_v_index)] = weight_u_v
+            self.__vertices[vert_v_index].vizinhos[str(vert_u_index)] = weight_u_v
+            self.__matriz[vert_u_index][vert_v_index] = weight_u_v
+            self.__matriz[vert_v_index][vert_u_index] = weight_u_v
+            self.__qtdArestas += 1
         arquivo.close()
 
     @property
