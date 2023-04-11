@@ -1,2 +1,8 @@
-__pycache__/
+# python
+*/__pycache__/
+
+# c
+*.so
+
+# VScode
 .vscode
