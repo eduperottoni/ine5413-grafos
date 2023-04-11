@@ -1,5 +1,6 @@
 from grafo import Grafo
 from vertice import Vertice
+from busca import BuscaLargura
 
 grafo = Grafo()
 
@@ -21,3 +22,10 @@ print(grafo.vizinhos(102)) # {'283': 1.0, '562': 1.0}
 print(grafo.haAresta(38, 563),  "-", grafo.haAresta(563, 54), "-", grafo.haAresta(64, 563))
 print(grafo.peso(222, 15)) # 1.0
 
+
+'''
+Questão 2 - Buscas
+'''
+
+# não sei como confirmir se está certo, e como fazer uma saída bonita (na verdade é só pensar mais, mas ñ tive tempo)
+print(BuscaLargura(grafo, 222))
