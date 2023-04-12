@@ -28,4 +28,4 @@ Questão 2 - Buscas
 '''
 
 # não sei como confirmir se está certo, e como fazer uma saída bonita (na verdade é só pensar mais, mas ñ tive tempo)
-print(BuscaLargura(grafo, 222))
+print(BuscaLargura(arquivo, 563))

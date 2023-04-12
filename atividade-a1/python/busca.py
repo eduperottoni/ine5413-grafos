@@ -1,4 +1,5 @@
 from collections import deque
+from grafo import Grafo
 
 '''
 [Buscas] (2,0pts) Crie um programa que receba um arquivo de grafo e o índice do 
@@ -15,7 +16,11 @@ Av -> ancestral direto no caminho
 '''
 
 # os ids dos vértices precisam sempre ter o -1
-def BuscaLargura(grafo, v_inicial):
+def BuscaLargura(arquivo, v_inicial):
+    # criando o grafo a partir das informações do arquivo
+    grafo = Grafo()
+    grafo.ler(arquivo)
+
     qtd_vertices = grafo.qtdVertices
 
     # atribuindo os valores iniciais
@@ -27,21 +32,26 @@ def BuscaLargura(grafo, v_inicial):
     Cv[v_inicial-1] = True
     Dv[v_inicial-1] = 0
 
+    arvore = {0: [v_inicial]}
+
     fila = deque([v_inicial])
 
     #TODO eu achei esse len(fila) ridículo, mas a lib não tem um size (os que testei não funcionou)
     while len(fila) != 0:
         u = fila.popleft()
 
+        lista_vizinhos = []
         for vizinho in grafo.vizinhos(u):
             vizinho = int(vizinho)
+            
             if Cv[vizinho-1] == False:
                 Cv[vizinho-1] = True
                 Dv[vizinho-1] = Dv[u-1] + 1
                 Av[vizinho-1] = u
 
+                lista_vizinhos.append(vizinho)
                 fila.append(vizinho)
-    
-    print("Dv: ", Dv)
-    print("Av: ", Av)
-    return (Dv, Av)
+        
+        arvore[Dv[u-1] + 1] = lista_vizinhos
+        
+    return (arvore)
