@@ -1,11 +1,12 @@
-from vertice import Vertice
+from estruturas.vertice import Vertice
 
 #Por enquanto, aceita ambos os tipos de grafo, com matriz inteira
 class Grafo:
 
-    def __init__(self):
+    def __init__(self, arquivo: str):
         self.__qtdVertices = 0
         self.__qtdArestas = 0
+        self.__ler(arquivo)
 
     def rotulo(self, id_vertice: int):
         return self.__vertices[id_vertice - 1].rotulo
@@ -13,7 +14,7 @@ class Grafo:
     def grau(self, id_vertice: int):
         return self.__vertices[id_vertice - 1].grau
     
-    def vizinhos(self, id_vertice: int) -> list:
+    def vizinhos(self, id_vertice: int) -> dict:
         return self.__vertices[id_vertice - 1].vizinhos
     
     def peso(self, id_vertice1: int, id_vertice2: int) -> float:
@@ -26,7 +27,7 @@ class Grafo:
         id_max, id_min = max(id_vertice1, id_vertice2), min(id_vertice1, id_vertice2)
         return self.__matriz[id_max-1][id_min-1] != float('inf')
 
-    def ler(self, nome_arquivo: str):
+    def __ler(self, nome_arquivo: str):
         # leitura do arquivo
         arquivo = open(nome_arquivo, 'r')
         primeira_linha = arquivo.readline().split()
@@ -53,8 +54,8 @@ class Grafo:
             vert_u_index = int(linha[0]) - 1
             vert_v_index = int(linha[1]) - 1
             weight_u_v = float(linha[2])
-            self.__vertices[vert_u_index].vizinhos[str(vert_v_index)] = weight_u_v
-            self.__vertices[vert_v_index].vizinhos[str(vert_u_index)] = weight_u_v
+            self.__vertices[vert_u_index].vizinhos[str(vert_v_index + 1)] = weight_u_v
+            self.__vertices[vert_v_index].vizinhos[str(vert_u_index + 1)] = weight_u_v
             self.__matriz[vert_u_index][vert_v_index] = weight_u_v
             self.__matriz[vert_v_index][vert_u_index] = weight_u_v
             self.__qtdArestas += 1
