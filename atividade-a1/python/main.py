@@ -1,6 +1,7 @@
 from estruturas.grafo import Grafo
 from estruturas.vertice import Vertice
 from algoritmos.busca_largura import busca_largura
+from algoritmos.floyd_warshall import floyd_warshall
 
 arquivo = "src/facebook_santiago.net"
 '''
@@ -40,3 +41,4 @@ def print_questao2():
 
 print_questao1()
 print_questao2()
+floyd_warshall(arquivo)
