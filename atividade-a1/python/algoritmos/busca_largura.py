@@ -3,7 +3,7 @@ from estruturas.grafo import Grafo
 
 '''
 [Buscas] (2,0pts) Crie um programa que receba um arquivo de grafo e o índice do 
-vértice s como argumentos3 . O programa deve fazer uma busca em largura a partir 
+vértice s como argumentos. O programa deve fazer uma busca em largura a partir 
 de s e deverá imprimir a saída na tela, onde cada linha deverá conter o nível 
 seguido de “:” e a listagem de vértices encontrados naquele nível. O exemplo abaixo 
 trata de uma saída, na qual a busca se iniciou pelo vértice s no nível 0, depois 
@@ -15,17 +15,18 @@ D -> distância até o vértice
 A -> ancestral direto no caminho
 '''
 
+# atribuindo os valores iniciais
+MAX_FLOAT = float('inf')
+
 # os ids dos vértices precisam sempre ter o -1
 def busca_largura(arquivo:str, v_inicial:int) -> dict:
     # criando o grafo a partir das informações do arquivo
     grafo = Grafo(arquivo)
 
     qtd_vertices = grafo.qtdVertices
-
-    # atribuindo os valores iniciais
-    max_type = float('inf')
+   
     C = [False for _ in range(qtd_vertices)]
-    D = [max_type for _ in range(qtd_vertices)]
+    D = [MAX_FLOAT for _ in range(qtd_vertices)]
     A = [None for _ in range(qtd_vertices)]
 
     C[v_inicial-1] = True

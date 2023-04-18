@@ -39,7 +39,4 @@ def floyd_warshall(arquivo: str) -> tuple:
                 index_v = vert_v.id - 1
                 D[index_u][index_v] = min(D[index_u][index_v], D[index_u][index_k] + D[index_k][index_v])
     
-    print(len(D))
-    
-
-
+    return D

@@ -1,4 +1,5 @@
 from estruturas.vertice import Vertice
+from estruturas.aresta import Aresta
 
 #Por enquanto, aceita ambos os tipos de grafo, com matriz inteira
 class Grafo:
@@ -6,6 +7,7 @@ class Grafo:
     def __init__(self, arquivo: str):
         self.__qtdVertices = 0
         self.__qtdArestas = 0
+        self.__arestas = []
         self.__ler(arquivo)
 
     def rotulo(self, id_vertice: int):
@@ -58,6 +60,7 @@ class Grafo:
             self.__vertices[vert_v_index].vizinhos[str(vert_u_index + 1)] = weight_u_v
             self.__matriz[vert_u_index][vert_v_index] = weight_u_v
             self.__matriz[vert_v_index][vert_u_index] = weight_u_v
+            self.__arestas.append(Aresta(self.__vertices[vert_u_index], self.__vertices[vert_v_index], weight_u_v))
             self.__qtdArestas += 1
         arquivo.close()
 
@@ -72,3 +75,7 @@ class Grafo:
     @property
     def vertices(self):
         return self.__vertices
+
+    @property
+    def arestas(self):
+        return self.__arestas
