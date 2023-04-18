@@ -8,7 +8,11 @@ class Vertice:
         valor = peso até esse vizinho
         '''
         self.__vizinhos = {}
-    
+        self.__endereco_arestas = []
+
+    def add_endereco_aresta(self, endereco):
+        self.__endereco_arestas.append(endereco)
+
     @property
     def id(self):
         return self.__id
@@ -26,4 +30,9 @@ class Vertice:
     @property
     def grau(self):
         return len(self.vizinhos.keys())
+
+    @property
+    def endereco_arestas(self):
+        return self.__endereco_arestas
+
 

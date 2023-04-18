@@ -3,10 +3,10 @@ from estruturas.vertice import Vertice
 from algoritmos.busca_largura import busca_largura
 from algoritmos.floyd_warshall import floyd_warshall
 from algoritmos.bellman_ford import bellman_ford
-# from algoritmos.ciclo_euleriano import ciclo_euleriano
+from algoritmos.ciclo_euleriano import ciclo_euleriano
 
-# arquivo = "src/facebook_santiago.net"
-arquivo = "src/fln_pequena.net"
+arquivo = "src/ContemCicloEuleriano.net"
+#arquivo = "src/fln_pequena.net"
 '''
 Questão 01 - Representação
  - 102 "Giovane Santos" -> (102, 284), (102, 563) 
@@ -42,9 +42,17 @@ def print_questao2():
     for i in range(len(arvore.keys())):
         print(f'{i}:{arvore[str(i)]}')
 
-# def print_questao3():
-#     haCiclo, ciclo = ciclo_euleriano(arquivo)
-#     print(haCiclo, ciclo)
+def print_questao3():
+    haCiclo, ciclo = ciclo_euleriano(arquivo)
+    if haCiclo:
+        print("Ha ciclo euleriano!")
+        for i in range(len(ciclo)):
+            if i != len(ciclo)-1:
+                print(ciclo[i].id, end = " -> ")
+            else:
+                print(ciclo[i].id)
+    else:
+        print("Nao ha ciclo")
 
 
 def print_questao4():
@@ -60,7 +68,7 @@ def print_questao5():
 
 
 print_questao1()
-print_questao2()
-#print_questao3()
-print_questao4()
+#print_questao2()
+print_questao3()
+#print_questao4()
 print_questao5()

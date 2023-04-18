@@ -60,7 +60,10 @@ class Grafo:
             self.__vertices[vert_v_index].vizinhos[str(vert_u_index + 1)] = weight_u_v
             self.__matriz[vert_u_index][vert_v_index] = weight_u_v
             self.__matriz[vert_v_index][vert_u_index] = weight_u_v
-            self.__arestas.append(Aresta(self.__vertices[vert_u_index], self.__vertices[vert_v_index], weight_u_v))
+            aresta = Aresta(self.__vertices[vert_u_index], self.__vertices[vert_v_index], weight_u_v)
+            self.__arestas.append(aresta)
+            self.__vertices[vert_u_index].add_endereco_aresta(len(self.__arestas)-1)
+            self.__vertices[vert_v_index].add_endereco_aresta(len(self.__arestas)-1)
             self.__qtdArestas += 1
         arquivo.close()
 
