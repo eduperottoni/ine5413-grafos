@@ -41,19 +41,19 @@ def print_questao2():
                 arvore[f'{level}'] = [v_index + 1]
     
     for i in range(len(arvore.keys())):
-        print(f'{i}:{arvore[str(i)]}')
+        print(f"{i}: {str(arvore[str(i)]).replace('[', '').replace(']','')}")
 
-def print_questao3():
+def print_questao3(arquivo):
     haCiclo, ciclo = ciclo_euleriano(arquivo)
     if haCiclo:
-        print("Ha ciclo euleriano!")
+        print("1")
         for i in range(len(ciclo)):
             if i != len(ciclo)-1:
-                print(ciclo[i].id, end = " -> ")
+                print(ciclo[i].id, end = ", ")
             else:
                 print(ciclo[i].id)
     else:
-        print("Nao ha ciclo")
+        print("0")
 
 
 def print_questao4():
@@ -65,23 +65,17 @@ def print_questao4():
             lista = [index + 1]
             
             aux = index
-            while a[aux] != v_inicial and a[aux] != None:
+            while a[aux] != v_inicial and aux+1 != v_inicial:
                 lista.append(a[aux])
                 aux = a[aux] - 1
             
-            lista.append(v_inicial)
+            if lista[-1] != v_inicial:
+                lista.append(v_inicial)
             
-            print(f"{index+1}: {lista}; d={d[index]}") #{str(lista).replace('[', '').replace(']','')}")
-            
-    # 1: 8, 3, 2, 1; d=11250
-    # 2: 8, 3, 2; d=10900
-    # 3: 8, 3; d=4900;
-    # 4: 8, 3, 2, 1, 4; d=15350;
-
+            lista.reverse()
+            print(f"{index+1}: {str(lista).replace('[', '').replace(']','')}; d={d[index]}")
     else:
         print("O grafo possui um ciclo negativo!")
-
-    print(d, a)
 
 def print_questao5():
     d = floyd_warshall(arquivo)
@@ -91,8 +85,15 @@ def print_questao5():
         print(f"{index + 1}:{string.replace('[', '').replace(']','')}")
 
 
-#print_questao1()
-#print_questao2()
-#print_questao3()
+print("Questão 01:")
+print_questao1()
+print("\nQuestão 02:")
+print_questao2()
+print("\nQuestão 03: (sem ciclo)")
+print_questao3(arquivo)
+print("\nQuestão 03: (com ciclo)")
+print_questao3(arquivo_ciclo_euleriano)
+print("\nQuestão 04:")
 print_questao4()
-#print_questao5()
+print("\nQuestão 05:")
+print_questao5()

@@ -49,8 +49,6 @@ def buscaCiclo(grafo: Grafo, v: Vertice, Ce: list) -> tuple[bool, list]:
             if Ce[endereco] == False:
                 (r, novo_ciclo) = buscaCiclo(grafo, x, Ce)
                 if r == False:
-                    for k in range(len(ciclo)):
-                        print(ciclo[k].id)
                     return (False, None)
                 novo_ciclo.pop(0)
                 ciclo = ciclo + novo_ciclo
