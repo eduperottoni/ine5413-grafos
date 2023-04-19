@@ -5,8 +5,9 @@ from algoritmos.floyd_warshall import floyd_warshall
 from algoritmos.bellman_ford import bellman_ford
 from algoritmos.ciclo_euleriano import ciclo_euleriano
 
-arquivo = "src/ContemCicloEuleriano.net"
-#arquivo = "src/fln_pequena.net"
+arquivo_ciclo_euleriano = "src/ContemCicloEuleriano.net"
+arquivo = "src/fln_pequena.net"
+
 '''
 Questão 01 - Representação
  - 102 "Giovane Santos" -> (102, 284), (102, 563) 
@@ -56,8 +57,31 @@ def print_questao3():
 
 
 def print_questao4():
-    valido, d, a = bellman_ford(arquivo, 8)
-    print(valido, d, a)
+    v_inicial = 8
+    valido, d, a = bellman_ford(arquivo=arquivo, v_inicial=v_inicial)
+
+    if valido:
+        for index, vertice in enumerate(a):
+            lista = [index + 1]
+            
+            aux = index
+            while a[aux] != v_inicial and a[aux] != None:
+                lista.append(a[aux])
+                aux = a[aux] - 1
+            
+            lista.append(v_inicial)
+            
+            print(f"{index+1}: {lista}; d={d[index]}") #{str(lista).replace('[', '').replace(']','')}")
+            
+    # 1: 8, 3, 2, 1; d=11250
+    # 2: 8, 3, 2; d=10900
+    # 3: 8, 3; d=4900;
+    # 4: 8, 3, 2, 1, 4; d=15350;
+
+    else:
+        print("O grafo possui um ciclo negativo!")
+
+    print(d, a)
 
 def print_questao5():
     d = floyd_warshall(arquivo)
@@ -67,8 +91,8 @@ def print_questao5():
         print(f"{index + 1}:{string.replace('[', '').replace(']','')}")
 
 
-print_questao1()
+#print_questao1()
 #print_questao2()
-print_questao3()
-#print_questao4()
-print_questao5()
+#print_questao3()
+print_questao4()
+#print_questao5()

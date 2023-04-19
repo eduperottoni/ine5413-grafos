@@ -25,14 +25,10 @@ def bellman_ford(arquivo:str, v_inicial:int):
     D[v_inicial-1] = 0
 
     for _ in range(1, qtd_vertices-1):
-        print('oi')
         for aresta in grafo.arestas:
-            print('oi2')
             u = aresta.vertice1.id - 1
             v = aresta.vertice2.id - 1
-            print(aresta.vertice1.id)
-            print(aresta.vertice2.id)
-            print(D[v], D[u] + aresta.peso)
+
             #Precisamos olhar nas duas direções
             if D[v] > (D[u] + aresta.peso):
                 D[v] = D[u] + aresta.peso
@@ -40,7 +36,6 @@ def bellman_ford(arquivo:str, v_inicial:int):
             elif D[u] > (D[v] + aresta.peso):
                 D[u] = D[v] + aresta.peso
                 A[u] = v + 1
-        print(D)
 
     for aresta in grafo.arestas:
         if D[aresta.vertice2.id - 1] > (D[aresta.vertice1.id - 1] + aresta.peso):
