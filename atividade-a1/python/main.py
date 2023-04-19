@@ -5,8 +5,14 @@ from algoritmos.floyd_warshall import floyd_warshall
 from algoritmos.bellman_ford import bellman_ford
 from algoritmos.ciclo_euleriano import ciclo_euleriano
 
+# arquivos p/ teste
 arquivo_ciclo_euleriano = "src/ContemCicloEuleriano.net"
-arquivo = "src/fln_pequena.net"
+arquivo_pequeno = "src/fln_pequena.net"
+arquivo = "src/facebook_santiago.net"
+
+
+# variável p/ teste
+v_inicial = 8
 
 '''
 Questão 01 - Representação
@@ -14,24 +20,24 @@ Questão 01 - Representação
  - 222 "Rosana Domingos" -> (15 222)
  - 563 "Carlos Robledo Werner" -> (38 563), (54 563), (64 563),... (tem 32 conexões)
 '''
-# TESTES
-# print(grafo.qtdVertices) # 688
-# print(grafo.qtdArestas) #8725
-# print(grafo.grau(563)) # 32
-# print(grafo.rotulo(222)) # Rosana Domingos
-# print(grafo.vizinhos(102)) # {'283': 1.0, '562': 1.0}
-# # True - True - False
-# print(grafo.haAresta(38, 563),  "-", grafo.haAresta(563, 54), "-", grafo.haAresta(64, 563))
-# print(grafo.peso(222, 15)) # 1.0
-def print_questao1():
+
+def print_questao1(arquivo:str):
     grafo = Grafo(arquivo)
-    pass
+    
+    print(grafo.qtdVertices) # 688
+    print(grafo.qtdArestas) #8725
+    print(grafo.grau(563)) # 32
+    print(grafo.rotulo(222)) # Rosana Domingos
+    print(grafo.vizinhos(102)) # {'283': 1.0, '562': 1.0}
+    # True - True - False
+    print(grafo.haAresta(38, 563),  "-", grafo.haAresta(563, 54), "-", grafo.haAresta(64, 563))
+    print(grafo.peso(222, 15)) # 1.0
 
 '''
 Questão 2 - Buscas
 '''
-def print_questao2():
-    d = busca_largura(arquivo, 8)[0]
+def print_questao2(arquivo:str, v_inicial:int):
+    d = busca_largura(arquivo, v_inicial)[0]
     arvore = {}
     for v_index, level in enumerate(d):
         if level != float('inf'):
@@ -43,7 +49,7 @@ def print_questao2():
     for i in range(len(arvore.keys())):
         print(f"{i}: {str(arvore[str(i)]).replace('[', '').replace(']','')}")
 
-def print_questao3(arquivo):
+def print_questao3(arquivo:str):
     haCiclo, ciclo = ciclo_euleriano(arquivo)
     if haCiclo:
         print("1")
@@ -56,8 +62,7 @@ def print_questao3(arquivo):
         print("0")
 
 
-def print_questao4():
-    v_inicial = 8
+def print_questao4(arquivo:str, v_inicial:int):
     valido, d, a = bellman_ford(arquivo=arquivo, v_inicial=v_inicial)
 
     if valido:
@@ -65,7 +70,7 @@ def print_questao4():
             lista = [index + 1]
             
             aux = index
-            while a[aux] != v_inicial and aux+1 != v_inicial:
+            while a[aux] != v_inicial and a[aux] != None:
                 lista.append(a[aux])
                 aux = a[aux] - 1
             
@@ -77,7 +82,7 @@ def print_questao4():
     else:
         print("O grafo possui um ciclo negativo!")
 
-def print_questao5():
+def print_questao5(arquivo:str):
     d = floyd_warshall(arquivo)
     
     for index, linha in enumerate(d):
@@ -86,14 +91,14 @@ def print_questao5():
 
 
 print("Questão 01:")
-print_questao1()
+print_questao1(arquivo)
 print("\nQuestão 02:")
-print_questao2()
+print_questao2(arquivo, v_inicial)
 print("\nQuestão 03: (sem ciclo)")
 print_questao3(arquivo)
 print("\nQuestão 03: (com ciclo)")
 print_questao3(arquivo_ciclo_euleriano)
 print("\nQuestão 04:")
-print_questao4()
+print_questao4(arquivo, v_inicial)
 print("\nQuestão 05:")
-print_questao5()
+print_questao5(arquivo_pequeno)
