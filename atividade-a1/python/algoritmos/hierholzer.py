@@ -2,7 +2,7 @@ from estruturas.grafo import Grafo
 from estruturas.vertice import Vertice
 import time
 
-def ciclo_euleriano(arquivo: str) -> list:
+def hierholzer(arquivo: str) -> list:
     grafo = Grafo(arquivo)
     Ce = [False for _ in range(grafo.qtdArestas)]   # marca todas as arestas como não percorridas
 

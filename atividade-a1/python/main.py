@@ -1,9 +1,8 @@
 from estruturas.grafo import Grafo
-from estruturas.vertice import Vertice
 from algoritmos.busca_largura import busca_largura
 from algoritmos.floyd_warshall import floyd_warshall
 from algoritmos.bellman_ford import bellman_ford
-from algoritmos.ciclo_euleriano import ciclo_euleriano
+from algoritmos.hierholzer import hierholzer
 
 # arquivos p/ teste
 arquivo_ciclo_euleriano = "src/ContemCicloEuleriano.net"
@@ -50,7 +49,7 @@ def print_questao2(arquivo:str, v_inicial:int):
         print(f"{i}: {str(arvore[str(i)]).replace('[', '').replace(']','')}")
 
 def print_questao3(arquivo:str):
-    haCiclo, ciclo = ciclo_euleriano(arquivo)
+    haCiclo, ciclo = hierholzer(arquivo)
     if haCiclo:
         print("1")
         for i in range(len(ciclo)):
