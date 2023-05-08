@@ -4,7 +4,7 @@ from estruturas.aresta import Aresta
 #Por enquanto, aceita ambos os tipos de grafo, com matriz inteira
 class Grafo:
 
-    def __init__(self, *arquivo: str):
+    def __init__(self, arquivo: str):
         self.__qtdVertices = 0
         self.__qtdArestas = 0
         self.__arestas = []
@@ -22,12 +22,8 @@ class Grafo:
     def peso(self, id_vertice1: int, id_vertice2: int) -> float:
         return self.__matriz[id_vertice1 - 1][id_vertice2 - 1]
 
-    # se for dirigido -> matriz inteira
-    # se não for -> matriz triangular
-    # TODO VER O CASO EM QUE O GRAFO É DIRIGIDO (ORDEM IMPORTA)
     def haAresta(self, id_vertice1: float, id_vertice2: float) -> bool:
-        id_max, id_min = max(id_vertice1, id_vertice2), min(id_vertice1, id_vertice2)
-        return self.__matriz[id_max-1][id_min-1] != float('inf')
+        return self.__matriz[id_vertice1-1][id_vertice2-1] != float('inf')
 
     def __ler(self, nome_arquivo: str):
         # leitura do arquivo
@@ -48,22 +44,25 @@ class Grafo:
             nome = linha[1]
             id = int(linha[0])
             self.__vertices[id - 1] = Vertice(int(linha[0]), nome)
-        arquivo.readline()
         
+        # leitura precisa ser diferente p/ grafos dirigidos
+        dirigido = True if arquivo.readline().split()[0].replace('*', '') == 'arcs' else False
         # preenche lista de adj. e matriz
         for linha in arquivo:
+            print(linha)
             linha = linha.split()
             vert_u_index = int(linha[0]) - 1
             vert_v_index = int(linha[1]) - 1
             weight_u_v = float(linha[2])
             self.__vertices[vert_u_index].vizinhos[str(vert_v_index + 1)] = weight_u_v
-            self.__vertices[vert_v_index].vizinhos[str(vert_u_index + 1)] = weight_u_v
             self.__matriz[vert_u_index][vert_v_index] = weight_u_v
-            self.__matriz[vert_v_index][vert_u_index] = weight_u_v
             aresta = Aresta(self.__vertices[vert_u_index], self.__vertices[vert_v_index], weight_u_v)
             self.__arestas.append(aresta)
             self.__vertices[vert_u_index].add_endereco_aresta(len(self.__arestas)-1)
-            self.__vertices[vert_v_index].add_endereco_aresta(len(self.__arestas)-1)
+            if not dirigido:
+                self.__vertices[vert_v_index].vizinhos[str(vert_u_index + 1)] = weight_u_v
+                self.__matriz[vert_v_index][vert_u_index] = weight_u_v
+                self.__vertices[vert_v_index].add_endereco_aresta(len(self.__arestas)-1)
             self.__qtdArestas += 1
         arquivo.close()
 
