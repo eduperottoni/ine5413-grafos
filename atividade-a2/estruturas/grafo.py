@@ -49,7 +49,7 @@ class Grafo:
         dirigido = True if arquivo.readline().split()[0].replace('*', '') == 'arcs' else False
         # preenche lista de adj. e matriz
         for linha in arquivo:
-            print(linha)
+            #print(linha)
             linha = linha.split()
             vert_u_index = int(linha[0]) - 1
             vert_v_index = int(linha[1]) - 1
