@@ -8,8 +8,8 @@ arquivo_agm = 'src/agm_tiny.net'
 grafo = Grafo(arquivo_grafo_orientado)
 
 
-def print_questao1(arquivo: str) -> None:
-    print('--- QUESTÃO 1 ---')
+def print_questao3(arquivo: str) -> None:
+    print('--- QUESTÃO 3 ---')
     arestas_agm = kruskal(arquivo)
     custo = 0
     arestas_formatadas = []
@@ -19,4 +19,4 @@ def print_questao1(arquivo: str) -> None:
     print(custo)
     print(str(arestas_formatadas).replace('[','').replace(']','').replace("'",''))
 
-print_questao1(arquivo_agm)
+print_questao3(arquivo_agm)
