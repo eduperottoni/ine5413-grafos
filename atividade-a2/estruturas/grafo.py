@@ -48,20 +48,21 @@ class Grafo:
         # leitura precisa ser diferente p/ grafos dirigidos
         dirigido = True if arquivo.readline().split()[0].replace('*', '') == 'arcs' else False
         # preenche lista de adj. e matriz
-        linha = linha.split()
-        vert_u_index = int(linha[0]) - 1
-        vert_v_index = int(linha[1]) - 1
-        weight_u_v = float(linha[2])
-        self.__vertices[vert_u_index].vizinhos[str(vert_v_index + 1)] = weight_u_v
-        self.__matriz[vert_u_index][vert_v_index] = weight_u_v
-        aresta = Aresta(self.__vertices[vert_u_index], self.__vertices[vert_v_index], weight_u_v)
-        self.__arestas.append(aresta)
-        self.__vertices[vert_u_index].add_endereco_aresta(len(self.__arestas)-1)
-        if not dirigido:
-            self.__vertices[vert_v_index].vizinhos[str(vert_u_index + 1)] = weight_u_v
-            self.__matriz[vert_v_index][vert_u_index] = weight_u_v
-            self.__vertices[vert_v_index].add_endereco_aresta(len(self.__arestas)-1)
-        self.__qtdArestas += 1
+        for linha in arquivo:
+            linha = linha.split()
+            vert_u_index = int(linha[0]) - 1
+            vert_v_index = int(linha[1]) - 1
+            weight_u_v = float(linha[2])
+            self.__vertices[vert_u_index].vizinhos[str(vert_v_index + 1)] = weight_u_v
+            self.__matriz[vert_u_index][vert_v_index] = weight_u_v
+            aresta = Aresta(self.__vertices[vert_u_index], self.__vertices[vert_v_index], weight_u_v)
+            self.__arestas.append(aresta)
+            self.__vertices[vert_u_index].add_endereco_aresta(len(self.__arestas)-1)
+            if not dirigido:
+                self.__vertices[vert_v_index].vizinhos[str(vert_u_index + 1)] = weight_u_v
+                self.__matriz[vert_v_index][vert_u_index] = weight_u_v
+                self.__vertices[vert_v_index].add_endereco_aresta(len(self.__arestas)-1)
+            self.__qtdArestas += 1
         arquivo.close()
 
     @property

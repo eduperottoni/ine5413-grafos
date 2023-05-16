@@ -18,7 +18,7 @@ def ordenacao_topologica(grafo : Grafo):
             DFS_Visit_OT(grafo, vertice, C, T, F, tempo, O)
     return O
 
-def DFS_Visit_OT(grafo : Grafo, vertice_inicial : Vertice, C : list[bool], T : list[float], F : list[float], tempo : int, O : list):
+def DFS_Visit_OT(grafo : Grafo, vertice_inicial : Vertice, C : 'list[bool]', T : 'list[float]', F : 'list[float]', tempo : int, O : list):
     C[vertice_inicial.id - 1] = True
     tempo += 1
     T[vertice_inicial.id - 1] = tempo
