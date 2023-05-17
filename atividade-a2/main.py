@@ -1,11 +1,25 @@
 from estruturas.grafo import Grafo
 from algoritmos.kruskal import kruskal
 from algoritmos.ordenacao_topologica import ordenacao_topologica
+from algoritmos.componentes_fortemente_conexas import componente_fortemente_conexa
 
 # arquivos p/ teste
-arquivo_grafo_orientado = "src/dirigido1.net"
+arquivo_grafo_orientado = "src/teste.net"
 arquivo_agm = 'src/agm_tiny.net'
 arquivo_manha = "src/manha.net"
+
+def print_questao1(arquivo_grafo_orientado):
+    print('--- QUESTÃO 1 ---')
+    grafo = Grafo(arquivo_grafo_orientado)
+
+    Pt = componente_fortemente_conexa(grafo)
+
+    print("1111111111111111111111111111")
+    print(Pt)
+
+    for i in Pt:
+        if i != None:
+            print(i.id)
 
 def print_questao2(arquivo_manha):
     print('--- QUESTÃO 2 ---')
@@ -27,5 +41,6 @@ def print_questao3(arquivo: str) -> None:
     print(custo)
     print(str(arestas_formatadas).replace('[','').replace(']','').replace("'",''))
 
+print_questao1(arquivo_grafo_orientado)
 print_questao2(arquivo_manha)
 print_questao3(arquivo_agm)
