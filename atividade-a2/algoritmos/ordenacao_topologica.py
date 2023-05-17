@@ -22,9 +22,10 @@ def DFS_Visit_OT(grafo : Grafo, vertice_inicial : Vertice, C : 'list[bool]', T :
     C[vertice_inicial.id - 1] = True
     tempo += 1
     T[vertice_inicial.id - 1] = tempo
-    for vertice in grafo.vertices:
-        if C[vertice.id - 1] == False:
-            DFS_Visit_OT(grafo, vertice, C, T, F, tempo, O)
+    for vertice in vertice_inicial.vizinhos.keys():
+        vertice = int(vertice)
+        if C[vertice - 1] == False:
+            DFS_Visit_OT(grafo, grafo.vertices[vertice - 1], C, T, F, tempo, O)
     tempo = tempo + 1
     F[vertice_inicial.id - 1] = tempo
     O.insert(0, vertice_inicial)
