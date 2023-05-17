@@ -4,7 +4,7 @@ from algoritmos.ordenacao_topologica import ordenacao_topologica
 from algoritmos.componentes_fortemente_conexas import componente_fortemente_conexa
 
 # arquivos p/ teste
-arquivo_grafo_orientado = "src/teste.net"
+arquivo_grafo_orientado = "src/dirigido1.net"
 arquivo_agm = 'src/agm_tiny.net'
 arquivo_manha = "src/manha.net"
 
@@ -13,8 +13,7 @@ def print_questao1(arquivo_grafo_orientado):
     grafo = Grafo(arquivo_grafo_orientado)
 
     Pt = componente_fortemente_conexa(grafo)
-    
-    print(Pt)
+
     qtd_arvore = Pt.count(None)
     arvores = [[] for _ in range(qtd_arvore)]
     
@@ -32,7 +31,9 @@ def print_questao1(arquivo_grafo_orientado):
             
             cont_arvores += 1
 
-    print(arvores)
+    for arvore in arvores:
+        print(', '.join(str(elemento) for elemento in arvore))
+
 
 
 def print_questao2(arquivo_manha):
