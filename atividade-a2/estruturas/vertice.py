@@ -38,4 +38,6 @@ class Vertice:
     def endereco_arestas(self):
         return self.__endereco_arestas
 
-
+    @vizinhos.setter
+    def vizinhos(self, vizinhos):
+        self.__vizinhos = vizinhos

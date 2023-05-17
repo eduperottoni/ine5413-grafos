@@ -13,13 +13,27 @@ def print_questao1(arquivo_grafo_orientado):
     grafo = Grafo(arquivo_grafo_orientado)
 
     Pt = componente_fortemente_conexa(grafo)
-
-    print("1111111111111111111111111111")
+    
     print(Pt)
+    qtd_arvore = Pt.count(None)
+    arvores = [[] for _ in range(qtd_arvore)]
+    
+    cont_arvores = 0
+    for index, vertice in enumerate(Pt):
+        if vertice == None:     
+            arvores[cont_arvores].append(index+1)
+            proximo = index+1
+            while True:
+                if proximo in Pt:
+                    proximo = Pt.index(proximo) + 1
+                    arvores[cont_arvores].append(proximo)
+                else:
+                    break
+            
+            cont_arvores += 1
 
-    for i in Pt:
-        if i != None:
-            print(i.id)
+    print(arvores)
+
 
 def print_questao2(arquivo_manha):
     print('--- QUESTÃO 2 ---')
