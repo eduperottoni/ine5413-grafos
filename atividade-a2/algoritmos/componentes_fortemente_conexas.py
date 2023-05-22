@@ -5,35 +5,23 @@ from estruturas.aresta import Aresta
 MAX_FLOAT = float('inf')
 
 def componente_fortemente_conexa(grafo):
-    T, P, F = DFS(grafo)
-    A = []
-
-    for aresta in grafo.arestas:
-        aresta_transp = Aresta(aresta.vertice2, aresta.vertice1, aresta.peso)
-        A.append(aresta_transp)
+    T, P, F = DFS(grafo, False)
     
-    #TODO: aqui preciso inverter a ordem dos vertices
     # a --> b
     # a <-- b
     new_neighbors = [{} for _ in range (grafo.qtdVertices)]
     for vertice in grafo.vertices:
         for vizinho in vertice.vizinhos.keys():
-            # vizinhos de a deleta b
-            # vizinhos de b adiciona a
             new_neighbors[int(vizinho) - 1][vertice.id] = vertice.vizinhos[vizinho]
     
     for i in range(grafo.qtdVertices):
         grafo.vertices[i].vizinhos = new_neighbors[i]
-    
 
-    grafo_transp = grafo
-    grafo_transp.arestas = A
-
-    Tt, Pt, Ft = DFS(grafo_transp)
+    Tt, Pt, Ft = DFS(grafo, True, F)
 
     return Pt
 
-def DFS(grafo):
+def DFS(grafo, adaptado, F=None):
     C = [False for _ in range(grafo.qtdVertices)]
     T = [MAX_FLOAT for _ in range(grafo.qtdVertices)]
     F = [MAX_FLOAT for _ in range(grafo.qtdVertices)]
@@ -41,9 +29,21 @@ def DFS(grafo):
 
     tempo = 0
 
-    for vertice in grafo.vertices:
-        if C[vertice.id - 1] == False:
-            DFS_visit(grafo, vertice, C, T, P, F, tempo)
+    if adaptado:
+        tempo_vertice = []
+        for u in range(grafo.qtdVertices):
+            tempo_vertice.append((F[u], u))
+        tempo_vertice.sort(reverse=True)
+    
+        for t, vertice in tempo_vertice:
+            if C[vertice] == False:
+                DFS_visit(grafo, grafo.vertices[vertice], C, T, P, F, tempo)
+                tempo = F[vertice]
+    else:
+        for vertice in grafo.vertices:
+            if C[vertice.id - 1] == False:
+                DFS_visit(grafo, vertice, C, T, P, F, tempo)
+                tempo = F[vertice.id - 1]
     
     return T, P, F
 
@@ -57,6 +57,7 @@ def DFS_visit(grafo, vertice, C, T, P, F, tempo):
         if C[u-1] == False:
             P[u-1] = vertice.id
             DFS_visit(grafo, grafo.vertices[u - 1], C, T, P, F, tempo)
+            tempo = F[u-1]
 
     tempo += 1
     F[vertice.id - 1] = tempo
