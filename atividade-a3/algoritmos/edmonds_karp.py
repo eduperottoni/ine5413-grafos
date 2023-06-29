@@ -81,7 +81,7 @@ def BFS(grafo, grafo_residual, fila, caminhoAumentante, capacidadeResidual, fina
                     fila.append(vizinho)
                 else:
                     return capacidadeResidual[final], caminhoAumentante
-
+    return 0, caminhoAumentante
 
 
 
