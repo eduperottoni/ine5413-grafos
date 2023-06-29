@@ -26,7 +26,7 @@ class Vertice:
         return self.__vizinhos
     
     def add_vizinhos(self, vizinho):
-        self.__vizinhos = vizinhos
+        self.__vizinhos = vizinho
     
     #ESTÁ FUNCIONANDO PARA GRAFOS NÃO DIRIGIDOS
     #PARA DIRIGIDOS, O GRAFO DEVE TER GRAU DE ENTRADA E GRAU DE SAÍDA
