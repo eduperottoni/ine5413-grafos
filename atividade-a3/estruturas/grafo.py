@@ -88,3 +88,15 @@ class Grafo:
     @vertices.setter
     def vertices(self, vertices):
         self.__vertices = vertices
+    
+    def X(self):
+        x = []
+        for aresta in self.__arestas:
+            x.append(int(aresta.vertice1.id))
+        return list(dict.fromkeys(x))
+    
+    def Y(self):
+        y = []
+        for aresta in self.__arestas:
+            y.append(int(aresta.vertice2.id))
+        return list(dict.fromkeys(y))
